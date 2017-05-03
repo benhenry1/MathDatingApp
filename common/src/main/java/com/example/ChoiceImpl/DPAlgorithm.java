@@ -1,4 +1,4 @@
-package ChoiceImpl;
+package com.example.ChoiceImpl;
 import java.util.*;
 public class DPAlgorithm {
 	private double[] candidates;
@@ -129,6 +129,6 @@ public class DPAlgorithm {
 
 
 	public static void main(String[] args) {
-		new DPAlgorithm(100);
+		//new DPAlgorithm(100);
 	}
 }

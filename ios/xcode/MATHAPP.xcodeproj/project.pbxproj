@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		063AA85AC6668A619B331614 /* moe-main-interfaces.m in Sources */ = {isa = PBXBuildFile; fileRef = 13DE312ACB46A467D783AA60 /* moe-main-interfaces.m */; };
 		58C6F5321DA66CB600309CB6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58C6F5301DA66CB600309CB6 /* Main.storyboard */; };
 		58C6F5341DA66CB600309CB6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 58C6F5331DA66CB600309CB6 /* Assets.xcassets */; };
 		58C6F5371DA66CB600309CB6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58C6F5351DA66CB600309CB6 /* LaunchScreen.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		13DE312ACB46A467D783AA60 /* moe-main-interfaces.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "moe-main-interfaces.m"; path = "../build/moe/main/ui-headers/moe-main-interfaces.m"; sourceTree = "<group>"; };
 		44512F48BBFE809169D6D47A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		5863B87B1DA682C800E46B6A /* MATHAPP-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MATHAPP-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5863B88E1DA682C800E46B6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				58C6F5261DA66CB600309CB6 /* MATHAPP */,
 				5863B87C1DA682C800E46B6A /* MATHAPP-Test */,
 				58C6F5251DA66CB600309CB6 /* Products */,
+				9C560F2DFE26497C9EB52E74 /* Multi-OS Engine */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,6 +101,14 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
+		};
+		9C560F2DFE26497C9EB52E74 /* Multi-OS Engine */ = {
+			isa = PBXGroup;
+			name = "Multi-OS Engine";
+			sourceTree = "<group>";
+			children = (
+				13DE312ACB46A467D783AA60 /* moe-main-interfaces.m */,
+			);
 		};
 /* End PBXGroup section */
 
@@ -239,6 +250,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C600F2234BBABD379A9A88D /* main.cpp in Sources */,
+				063AA85AC6668A619B331614 /* moe-main-interfaces.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
