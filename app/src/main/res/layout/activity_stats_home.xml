@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:text="Algorithm Simulation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/statsTitle"
+        android:layout_weight="0.03" />
+
+    <TextView
+        android:text="This section of the app allows you to compare the effectiveness of both Selection Algorithms. All you have to do is tell us how big you want the dataset to be. We will generate your dataset, run the algorithms a few times, and give you statistics on the average outcome!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:layout_weight="0.03" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="Enter  the size of your desired dataset. Defaults to 100"
+            android:layout_width="266dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="66dp"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/setSize"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="How many iterations of the algorithm would you like to run? Defaults to 1000"
+            android:layout_width="266dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView4" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="66dp"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/numIter"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <Button
+        android:text="Simulate!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/simulate"
+        android:layout_weight="0.03" />
+
+</LinearLayout>

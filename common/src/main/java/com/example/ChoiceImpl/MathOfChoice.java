@@ -2,7 +2,7 @@ package com.example.ChoiceImpl;
 import java.util.Arrays;
 //import java.util.ArrayUtils;
 
-public class MathOfChoice {
+public class MathOfChoice extends ChoiceAlgorithm {
 	//set by generateCandidates(int)
 	private double[] candidates = null;
 
@@ -14,6 +14,7 @@ public class MathOfChoice {
 	//set by optimalChoiceAlgorithm()
 	public double maxEltFound = 0;
 	public int    maxEltFoundIndex = 0;
+	public double maxEltRank = 0;
 	private double maxEltFoundWithinR = 0;
 	private int    maxEltFoundIndexWithinR = 0;
 
@@ -31,7 +32,7 @@ public class MathOfChoice {
 		else
 			throw new IllegalStateException("Something went wrong when creating the candidate list.");
 
-		printStatistics();
+		//printStatistics();
 	}
 	
 	public MathOfChoice(double[] candidates) {
@@ -81,7 +82,7 @@ public class MathOfChoice {
 		}
 		this.optimalR = maxR;
 		this.chanceOfMaxRank = maxChance;
-		System.out.println(maxChance + "% at r = " + maxR);
+		//System.out.println(maxChance + "% at r = " + maxR);
 		//return maxChance;
 	}
 
@@ -118,7 +119,7 @@ public class MathOfChoice {
 			counter++;
 		}
 
-		System.out.println(counter + ": " + currOptimal + " " + optBeforeR + " index " + posOfCurrOptimal + " " + posBeforeR);
+		//System.out.println(counter + ": " + currOptimal + " " + optBeforeR + " index " + posOfCurrOptimal + " " + posBeforeR);
 		
 		if (currOptimal > 0) {
 			this.maxEltFound =  currOptimal;
@@ -129,17 +130,18 @@ public class MathOfChoice {
 		}
 		this.maxEltFoundWithinR = optBeforeR;
 		this.maxEltFoundIndexWithinR = posBeforeR;
+        int rankOfAnswer = getRankOf(maxEltFoundIndex, candidates);
+        this.maxEltRank = rankOfAnswer;
 		//return posOfCurrOptimal;
 	}
 
 	private void printStatistics() {
 		String stats = "";
-		int rankOfAnswer = getRankOf(maxEltFoundIndex, candidates);
 		int rankOfElementBeforeR = getRankOf(maxEltFoundIndexWithinR, candidates);
 		stats += "For this randomly generated " + candidates.length + "-element set, the algorithm determined the optimal place to stop evaluating was at element " + optimalR + ".\n";
 		stats += "Before reaching " + optimalR + ", the largest value found was " + maxEltFoundWithinR + " at index " + maxEltFoundIndexWithinR + ". This element was of rank " + rankOfElementBeforeR + "\n";
 		stats += "Once element " + optimalR + " was passed, the next largest element found was " + maxEltFound + " at index " + maxEltFoundIndex + ", which was the final choice of the algorithm.\n\n";
-		stats += "The chosen element " + maxEltFound + " was of rank " + rankOfAnswer + " in the original set of candidates.\n";
+		stats += "The chosen element " + maxEltFound + " was of rank " + maxEltRank + " in the original set of candidates.\n";
 
 
 		System.out.println(stats);
@@ -161,6 +163,13 @@ public class MathOfChoice {
 
 		//The value was not found in the sorted array.....
 		return -1;
+	}
+
+	public double getChosenValue() {
+		return maxEltFound;
+	}
+	public double getChosenRank() {
+		return maxEltRank;
 	}
 
 	public static void main(String[] args) {

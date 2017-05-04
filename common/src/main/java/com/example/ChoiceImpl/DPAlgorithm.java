@@ -1,6 +1,6 @@
 package com.example.ChoiceImpl;
 import java.util.*;
-public class DPAlgorithm {
+public class DPAlgorithm extends ChoiceAlgorithm {
 	private double[] candidates;
 	private int numCandidates;
 
@@ -19,7 +19,7 @@ public class DPAlgorithm {
 		this.c 			= generateCValues();
 		this.optimal    = getOptimalValue();
 
-		printStatistics();
+		//printStatistics();
 
 		//Debug from here out
 		/*String cs = "";String ss = ""; String rrs = ""; String candidatess = "";
@@ -115,7 +115,7 @@ public class DPAlgorithm {
 		//Tell them their input, chosen stopping point, chosen candidate, and the rank of the candidate.
 		String str = "";
 		str+= "Based on your input of size " + numCandidates + ", the algorithm determined the optimal stopping point was at candidate " + this.optimal + ".\n";
-		str+= "Using this optimal solution, the algorithm chose the value " + candidates[optimal] + ", which is of rank " + rankFinder.tailSet(candidates[optimal]).size() + " in the total set of candidates.\n"; 
+		str+= "Using this optimal solution, the algorithm chose the value " + candidates[optimal] + ", which is of rank " + rankFinder.tailSet(candidates[optimal]).size() + " in the total set of candidates.\n";
 		System.out.println(str);
 		System.out.println(c[0]);
 	}
