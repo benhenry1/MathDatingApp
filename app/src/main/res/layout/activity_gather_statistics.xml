@@ -13,122 +13,6 @@
 
 
         <LinearLayout
-            android:id="@+id/stats"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:gravity="center"
-            android:orientation="vertical" >
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Dynamic Programming Algorithm"
-                android:textColor="#b7102f"
-                android:textSize="25dp"
-                android:textAlignment="center">
-            </TextView>
-
-            <TextView
-                android:text="Average Rank:"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/avgRankDPTitle"
-                android:textAlignment="center"
-                android:textSize="25sp" />
-
-            <TextView
-                android:text="TextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/avgRankDP"
-                android:textAlignment="center"
-                android:textSize="25sp" />
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="26dp">
-
-                <TextView
-                    android:text="Rank 1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/dpRank1title"
-                    android:layout_weight="0.49" />
-
-                <TextView
-                    android:text="Rank 2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/dpRank2title"
-                    android:layout_weight="0.76" />
-
-                <TextView
-                    android:text="Rank 3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/dpRank3title"
-                    android:layout_weight="0.65" />
-
-                <TextView
-                    android:text="Rank 4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/dpRank4title"
-                    android:layout_weight="0.50" />
-
-                <TextView
-                    android:text="Rank 5"
-                    android:layout_width="37dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/dpRank5title"
-                    android:layout_weight="0.38" />
-            </LinearLayout>
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:text="Rank 1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/dpRank1"
-                    android:layout_weight="0.49" />
-
-                <TextView
-                    android:text="Rank 2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/dpRank2"
-                    android:layout_weight="0.76" />
-
-                <TextView
-                    android:text="Rank 3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/dpRank3"
-                    android:layout_weight="0.65" />
-
-                <TextView
-                    android:text="Rank 4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/dpRank4"
-                    android:layout_weight="0.50" />
-
-                <TextView
-                    android:text="Rank 5"
-                    android:layout_width="37dp"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/dpRank5"
-                    android:layout_weight="0.38" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/love"
             android:layout_width="fill_parent"
 
@@ -208,7 +92,7 @@
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="73dp">
 
                 <TextView
                     android:text="Rank 1"
@@ -246,6 +130,134 @@
                     android:layout_weight="0.38" />
             </LinearLayout>
 
+            <com.github.mikephil.charting.charts.BarChart
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/bargraphmoc"></com.github.mikephil.charting.charts.BarChart>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/stats"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Dynamic Programming Algorithm"
+                android:textColor="#b7102f"
+                android:textSize="25dp"
+                android:textAlignment="center">
+            </TextView>
+
+            <TextView
+                android:text="Average Rank:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/avgRankDPTitle"
+                android:textAlignment="center"
+                android:textSize="25sp" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/avgRankDP"
+                android:textAlignment="center"
+                android:textSize="25sp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="26dp">
+
+                <TextView
+                    android:text="Rank 1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dpRank1title"
+                    android:layout_weight="0.49" />
+
+                <TextView
+                    android:text="Rank 2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dpRank2title"
+                    android:layout_weight="0.76" />
+
+                <TextView
+                    android:text="Rank 3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dpRank3title"
+                    android:layout_weight="0.65" />
+
+                <TextView
+                    android:text="Rank 4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dpRank4title"
+                    android:layout_weight="0.50" />
+
+                <TextView
+                    android:text="Rank 5"
+                    android:layout_width="37dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dpRank5title"
+                    android:layout_weight="0.38" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="38dp">
+
+                <TextView
+                    android:text="Rank 1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dpRank1"
+                    android:layout_weight="0.49" />
+
+                <TextView
+                    android:text="Rank 2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dpRank2"
+                    android:layout_weight="0.76" />
+
+                <TextView
+                    android:text="Rank 3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dpRank3"
+                    android:layout_weight="0.65" />
+
+                <TextView
+                    android:text="Rank 4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dpRank4"
+                    android:layout_weight="0.50" />
+
+                <TextView
+                    android:text="Rank 5"
+                    android:layout_width="37dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dpRank5"
+                    android:layout_weight="0.38" />
+
+            </LinearLayout>
+
+            <com.github.mikephil.charting.charts.BarChart
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:id="@+id/bargraphdp"
+                android:layout_weight="0.49"></com.github.mikephil.charting.charts.BarChart>
         </LinearLayout>
     </ViewFlipper>
+
 </LinearLayout>

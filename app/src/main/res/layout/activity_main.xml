@@ -23,7 +23,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="15dp"
-    android:text="Compare Statistics of the Main Algorithms"
+    android:text="View Algorithm Statistics"
     android:textColor="#b7102f"
     android:textSize="25dp">
     </TextView>
@@ -34,6 +34,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/statistics" />
+
+    <Button
+        android:text="Go To Statistics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/statPageButton" />
 </LinearLayout>
 
 <LinearLayout
@@ -50,7 +56,7 @@
     android:layout_marginTop="15dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Find Your True Love (With Probability ~38%)"
+    android:text="Soulmate Matcher (With Probability ~38%)"
     android:textColor="#191975"
     android:textSize="25dp"
     android:textStyle="italic" >
@@ -63,6 +69,12 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:src="@drawable/love" />
-    </LinearLayout>
+
+    <Button
+        android:text="Find The One"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lovePageButton" />
+</LinearLayout>
     </ViewFlipper>
     </LinearLayout>

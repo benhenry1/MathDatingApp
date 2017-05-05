@@ -43,7 +43,7 @@ public class DPAlgorithm extends ChoiceAlgorithm {
 		this.c = generateCValues();
 		this.optimal = getOptimalValue();
 		
-		printStatistics();
+		//printStatistics();
 	}
 
 	private double[] generateCandidates(int numCandidates) {

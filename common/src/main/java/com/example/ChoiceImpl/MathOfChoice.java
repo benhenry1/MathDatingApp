@@ -48,7 +48,7 @@ public class MathOfChoice extends ChoiceAlgorithm {
 		//else
 		//	throw new IllegalStateException("Something went wrong when creating the candidate list.");
 
-		printStatistics();
+		//printStatistics();
 	}
 
 

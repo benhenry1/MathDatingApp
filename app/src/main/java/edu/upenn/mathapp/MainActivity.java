@@ -1,10 +1,13 @@
 package edu.upenn.mathapp;
 
+import android.content.Intent;
 import android.gesture.Gesture;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ViewFlipper;
 
 public class MainActivity extends AppCompatActivity {
@@ -16,8 +19,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         viewFlipper = (ViewFlipper) findViewById(R.id.viewflipper);
         gestureDetector = new GestureDetector(this.getApplicationContext(), new GestureTap());
+
+        Button statButton = (Button) findViewById(R.id.statPageButton);
+        Button loveButton = (Button) findViewById(R.id.lovePageButton);
+
+        statButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent statIntent = new Intent(getApplicationContext(), StatisticsHomeActivity.class);
+                startActivity(statIntent);
+            }
+        });
+
+        loveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent loveIntent = new Intent(getApplicationContext(), /*TODO: Add this class when it exists*/null);
+            }
+        });
 
 
     }

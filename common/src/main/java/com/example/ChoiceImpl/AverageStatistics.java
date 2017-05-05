@@ -36,14 +36,18 @@ public class AverageStatistics {
 
         //SLOW AF! Creating each instance involves actually simulating. May change that. Threads?
         for (int i = 0; i < numIterations; i++) {
-            dpAlgorithms.add(new DPAlgorithm(numCandidates));
-            mathOfChoices.add(new MathOfChoice(numCandidates));
+            double[] cand = new double[numCandidates];
+            for ( int counter = 0; counter < numCandidates; counter++ ) {
+                cand[counter] = Math.random();
+            }
+            dpAlgorithms.add(new DPAlgorithm(cand)); //Give both algorithms the same set of doubles
+            mathOfChoices.add(new MathOfChoice(cand));
         }
 
         int sumDPRank= 0, sumMOCRank = 0;
         double avgDPRank = 0, avgMOCRank = 0;
-        int[] dpRankCounter = new int[5]; //c[0] = rank 1
-        int[] mocRankCounter= new int[5];
+        int[] dpRankCounter = new int[numCandidates]; //c[0] = rank 1
+        int[] mocRankCounter= new int[numCandidates];
 
         //scrape out the statistics
         /*************Add more statistics here. These were the ones I thought of**************/
@@ -51,20 +55,17 @@ public class AverageStatistics {
         for (DPAlgorithm iteration : dpAlgorithms) {
             sumDPRank += iteration.getChosenRank();
             int rank = (int)iteration.getChosenRank();
-            if ( rank <= 5 && rank >= 1 ) {
-                dpRankCounter[rank - 1]++;
-            }
+            dpRankCounter[rank - 1]++;
         }
         avgDPRank = (sumDPRank) / (double)numIterations;
 
         for (MathOfChoice moc : mathOfChoices) {
             sumMOCRank += moc.getChosenRank();
-            System.out.println(moc.getChosenRank());
+            //System.out.println(moc.getChosenRank());
             int rank = (int)moc.getChosenRank();
-            if ( rank <= 5 && rank >= 1 ) {
+            if (rank != -1)
                 mocRankCounter[rank - 1]++;
 
-            }
         }
         avgMOCRank = (sumMOCRank) / (double)numIterations;
 
@@ -107,6 +108,12 @@ public class AverageStatistics {
         return rankCounterMOC[4] / (double)numIterations;
     }
 
+    public int[] getMOCRankCounterArray() {
+        return rankCounterMOC;
+    }
+    public int[] getDPRankCounterArray() {
+        return rankCounterDP;
+    }
 
     public double getAvgRankDP() {
         return avgRankDP;
