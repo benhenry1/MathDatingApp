@@ -26,7 +26,14 @@
         <activity android:name=".StatisticsHomeActivity" >
 
         </activity>
-        <activity android:name=".GatherStatisticsActivity"></activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+        <activity android:name=".GatherStatisticsActivity"></activity>
+        <activity android:name=".DatingHomeActivity">
+        </activity>
+        <activity android:name=".NewDateActivity">
+        </activity>
+        <activity android:name=".ViewDateActivity">
+        </activity>
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
         <meta-data
             android:name="com.google.android.gms.version"
