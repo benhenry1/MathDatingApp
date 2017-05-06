@@ -61,7 +61,7 @@ public class DatingHomeActivity extends AppCompatActivity {
             }
         }
 
-        while(pauseforinput);
+        //while(pauseforinput);
 
         dateCount = (TextView) findViewById(R.id.dateCount);
         datesTotal= (TextView) findViewById(R.id.totalDates);
