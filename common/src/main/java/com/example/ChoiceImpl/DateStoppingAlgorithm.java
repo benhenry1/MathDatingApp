@@ -27,7 +27,7 @@ public class DateStoppingAlgorithm extends ChoiceAlgorithm {
     private double[] generateCValues() {
         double[] tentCVal = new double[numCandidates];
         tentCVal[numCandidates - 1] = (numCandidates + 1) / 2;
-
+        //System.out.println(numCandidates + " NC")
         this.s = new int[numCandidates];
         s[numCandidates - 1] = (int)((numCandidates + 1) / 2); //init with s_n-1
 
@@ -43,7 +43,7 @@ public class DateStoppingAlgorithm extends ChoiceAlgorithm {
             //get si
             int si = (int) (((i+(1.0))/(numCandidates+(1.0))) * ci);
             s[i] = si;
-            //System.out.println(tentCVal[i] + " " + s[i]);
+            System.out.println(tentCVal[i] + " " + s[i]);
         }
         return tentCVal;
     }
@@ -71,7 +71,8 @@ public class DateStoppingAlgorithm extends ChoiceAlgorithm {
     //RET TRUE if this is the stopping element
     public boolean addNewDate(Date d, int relrank) {
         datesInChronoOrder.add(d);
-        if (relrank < s[datesInChronoOrder.size() - 1]) //RR 1 indexed, dates 0 indexed
+        System.out.println("relrank, s " + relrank + " " + s[datesInChronoOrder.size()] + " " + datesInChronoOrder.size());
+        if (relrank <= s[datesInChronoOrder.size()]) //RR 1 indexed, dates 0 indexed
             return true;
         return false;
     }

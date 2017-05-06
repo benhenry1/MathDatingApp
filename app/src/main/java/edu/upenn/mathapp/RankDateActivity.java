@@ -167,7 +167,8 @@ public class RankDateActivity extends AppCompatActivity {
         if ( !DatingHomeActivity.dateListContains(d) ) {
             DatingHomeActivity.insertDateAsRank(rank, d);
 
-            if (DatingHomeActivity.stoppingAlgorithm.addNewDate(d, rank)) {//This returns whether or not this is the stopping element
+            if (DatingHomeActivity.stoppingAlgorithm.addNewDate(d, rank)
+                    || (getEffectiveSize(dateList) >= DatingHomeActivity.numAvailableDates)) {//This returns whether or not this is the stopping element
                 homeIntent = new Intent(this, ViewDateActivity.class);
                 homeIntent.putExtra("Date", d);
                 Toast.makeText(getApplicationContext(),"Congratulations! It turns out that " + d.getName() + " is your soulmate!", Toast.LENGTH_LONG);

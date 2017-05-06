@@ -32,12 +32,13 @@ import java.util.ArrayList;
 
 public class DatingHomeActivity extends AppCompatActivity {
     private static boolean firstRun = true; //static so it keeps its state
+    private boolean pauseforinput = true;
     public static DateStoppingAlgorithm stoppingAlgorithm;
 
     private final Context context = this;
     private TextView dateCount, datesTotal;
 
-    private static int numAvailableDates = 10; //the NumCandidates used in the future
+    public static int numAvailableDates = 10; //the NumCandidates used in the future
 
     private static ArrayList<Date> datesByPreferenceOrder;
 
@@ -49,8 +50,8 @@ public class DatingHomeActivity extends AppCompatActivity {
         if (firstRun) {
             firstRun = false; //TODO: This only works over 1 app run. make global somehow. write to file?
             promptForInput();
+            System.out.println(numAvailableDates);
             datesByPreferenceOrder = new ArrayList<Date>(numAvailableDates);
-            stoppingAlgorithm = new DateStoppingAlgorithm(numAvailableDates);
 
             //init arraylist with nulls apparently
             int i = 0;
@@ -60,20 +61,23 @@ public class DatingHomeActivity extends AppCompatActivity {
             }
         }
 
+        while(pauseforinput);
 
-
-        /*********************Programmatically list all dates**********************/
-
-        LinearLayout dates = (LinearLayout) findViewById(R.id.dateList);
         dateCount = (TextView) findViewById(R.id.dateCount);
         datesTotal= (TextView) findViewById(R.id.totalDates);
         dateCount.setText("Date Count: " + RankDateActivity.getEffectiveSize(datesByPreferenceOrder));
         datesTotal.setText("Total Dates: " + numAvailableDates);
+
+        System.out.println(numAvailableDates);
+        stoppingAlgorithm = new DateStoppingAlgorithm(numAvailableDates);
+        /*********************Programmatically list all dates**********************/
+
+
         int idSetter = 0;
         for (Date d : datesByPreferenceOrder) {
 
             if (d == null) continue;
-
+            LinearLayout dates = (LinearLayout) findViewById(R.id.dateList);
             LinearLayout layout = new LinearLayout(this);
             layout.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -126,7 +130,6 @@ public class DatingHomeActivity extends AppCompatActivity {
 
             idSetter++;
         }
-
         Button newDate = (Button) findViewById(R.id.newDate);
         newDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,6 +140,12 @@ public class DatingHomeActivity extends AppCompatActivity {
                 startActivity(newDateIntent);
             }
         });
+    }
+
+    private void continueRun() {
+
+
+
 
     }
 
@@ -197,15 +206,21 @@ public class DatingHomeActivity extends AppCompatActivity {
                 .show();
         numAvailableDates = 10;
         datesTotal.setText("Total Dates: " + numAvailableDates);
+        pauseforinput = false;
+        //continueRun();
     }
 
     private void userSubmit(int in) {
         if (in > 0)
             numAvailableDates = in;
-        else
+        else {
             userCanceled();
+            return;
+        }
 
         datesTotal.setText("Total Dates: " + numAvailableDates);
+        pauseforinput = false;
+        //continueRun();
     }
 
     public static ArrayList<Date> getDateList() {
