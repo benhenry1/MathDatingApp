@@ -46,7 +46,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Name"
             android:ems="10"
             android:id="@+id/newName"
             android:layout_weight="1" />
@@ -70,7 +69,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:text="Name"
             android:ems="10"
             android:id="@+id/newAge"
             android:layout_weight="1" />
@@ -93,7 +91,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
-            android:text="Name"
             android:ems="10"
             android:id="@+id/newHeight"
             android:layout_weight="1" />
@@ -116,7 +113,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Name"
             android:ems="10"
             android:id="@+id/newWeight"
             android:layout_weight="1" />
@@ -139,7 +135,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Name"
             android:ems="10"
             android:id="@+id/newOcc"
             android:layout_weight="1" />

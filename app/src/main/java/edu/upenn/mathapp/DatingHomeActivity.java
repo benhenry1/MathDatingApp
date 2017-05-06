@@ -1,5 +1,6 @@
 package edu.upenn.mathapp;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,7 +33,7 @@ public class DatingHomeActivity extends AppCompatActivity {
 
     private int numAvailableDates = 10; //the NumCandidates used in the future
 
-    private ArrayList<Date> datesByPreferenceOrder;
+    private static ArrayList<Date> datesByPreferenceOrder;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -40,9 +41,16 @@ public class DatingHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dating_home);
 
         if (true) {
-            //firstRun = false; TODO: Figure out details here. This isnt well thought out
+            firstRun = false; //TODO: Figure out details here. This isnt well thought out
             promptForInput();
             datesByPreferenceOrder = new ArrayList<Date>(numAvailableDates);
+
+            //init arraylist with nulls apparently
+            int i = 0;
+            while ( i < numAvailableDates ) {
+                datesByPreferenceOrder.add(datesByPreferenceOrder.size(), null);
+                i++;
+            }
         }
 
 
@@ -52,9 +60,10 @@ public class DatingHomeActivity extends AppCompatActivity {
         LinearLayout dates = (LinearLayout) findViewById(R.id.dateList);
         TextView datecount = (TextView) findViewById(R.id.dateCount);
         TextView datestotal= (TextView) findViewById(R.id.totalDates);
-        datecount.setText("Date Count: " + datesByPreferenceOrder.size());
+        datecount.setText("Date Count: " + RankDateActivity.getEffectiveSize(datesByPreferenceOrder));
         datestotal.setText("Total Dates: " + numAvailableDates);
         for (Date d : datesByPreferenceOrder) {
+            if (d == null) continue;
             RelativeLayout layout = new RelativeLayout(this);
             dateHack = d; //This is so the onclick listener below can access the current date. IDK why it works but it does
             ImageButton profile = new ImageButton(this);
@@ -96,14 +105,16 @@ public class DatingHomeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent newDateIntent = new Intent(getApplicationContext(), NewDateActivity.class);
                 newDateIntent.putExtra("NumDates", datesByPreferenceOrder.size());
+                newDateIntent.putExtra("Dates", datesByPreferenceOrder);
                 startActivity(newDateIntent);
             }
         });
 
     }
 
-    public void insertDateAtIndex(int index, Date d) {
-        //TODO: Implement
+    //index should be desired rank - 1 because of the 0 indexing
+    public static void insertDateAsRank(int rank, Date d) {
+        datesByPreferenceOrder.add(rank - 1, d);
     }
 
 
@@ -155,6 +166,10 @@ public class DatingHomeActivity extends AppCompatActivity {
         alertDialog.show();
 
 
+    }
+
+    public ArrayList<Date> getDateList() {
+        return datesByPreferenceOrder;
     }
 
 }

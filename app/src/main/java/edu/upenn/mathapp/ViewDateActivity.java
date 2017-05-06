@@ -15,6 +15,12 @@ import com.example.ChoiceImpl.Date;
 
 public class ViewDateActivity extends AppCompatActivity {
     private Date d;
+
+    //These bools will be used to give the user an option to provide more detail after the init screen
+    private boolean hasAge = false, hasHeight = false, hasOcc = false, hasWeight = false;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,15 +38,43 @@ public class ViewDateActivity extends AppCompatActivity {
             pic.setImageBitmap(img);
         }
 
-        TextView age    = (TextView) findViewById(R.id.dateAge);
-        age.setText(d.getAge() + "yr");
-        TextView height = (TextView) findViewById(R.id.dateHeight);
-        height.setText(d.getHeight() + "in");
-        TextView weight = (TextView) findViewById(R.id.dateWeight);
-        weight.setText(d.getWeight() + "lb");
-        TextView occ    = (TextView) findViewById(R.id.dateOccupation);
-        occ.setText(d.getOccupation());
+        //Guaranteed to have a name, we dont need to check
+        TextView name   = (TextView) findViewById(R.id.newName);
+        name.setText(d.getName());
 
+
+        TextView age    = (TextView) findViewById(R.id.dateAge);
+        if ( d.getAge() == -1 ) {
+            age.setText("Unspecified");
+        }
+        else {
+            age.setText(d.getAge() + "yr");
+            hasAge = true;
+        }
+        //If height is unset it will be the empty string
+        TextView height = (TextView) findViewById(R.id.dateHeight);
+        if ( d.getHeight().equals("") )
+            height.setText("");
+        else {
+            height.setText(d.getHeight());
+            hasHeight = true;
+        }
+        TextView weight = (TextView) findViewById(R.id.dateWeight);
+        if ( d.getWeight() != -1 )
+            weight.setText("");
+        else {
+            weight.setText(d.getWeight() + "lb");
+            hasWeight = true;
+        }
+        TextView occ    = (TextView) findViewById(R.id.dateOccupation);
+        if ( d.getOccupation().equals("") )
+            occ.setText("");
+        else {
+            occ.setText(d.getOccupation());
+            hasOcc = true;
+        }
+
+        //TODO: Give user buttons to add unadded parameters
 
     }
 

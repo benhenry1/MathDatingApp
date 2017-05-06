@@ -24,6 +24,7 @@ import com.example.ChoiceImpl.Date;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import static edu.upenn.mathapp.PhotoActivity.REQUEST_IMAGE_CAPTURE;
 import static edu.upenn.mathapp.R.attr.height;
@@ -45,6 +46,7 @@ public class NewDateActivity extends AppCompatActivity {
     private File picture = null;
 
     private int numDates;
+    private ArrayList<Date> dates; //To be passed onto next activity
 
     //Fields needed for validation (Name is the only req field
     EditText name, age, weight, occ, height;
@@ -55,6 +57,7 @@ public class NewDateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_date);
         numDates = (int) getIntent().getSerializableExtra("NumDates");
+        dates = (ArrayList<Date>) getIntent().getSerializableExtra("Dates");
 
         Button takePic = (Button) findViewById(R.id.newPicButton);
         takePic.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +131,10 @@ public class NewDateActivity extends AppCompatActivity {
             d.setPicture(picture);
         }
 
-        Intent rankIntent = new Intent(getApplicationContext(), null/*TODO: Rank Activity*/);
+        Intent rankIntent = new Intent(getApplicationContext(), RankDateActivity.class/*TODO: Rank Activity*/);
+        rankIntent.putExtra("Date", d);
+        rankIntent.putExtra("Dates", dates); //Sorry for bad naming. Date is the newly created, dates is the list of all dates
+        startActivity(rankIntent);
     }
 
 

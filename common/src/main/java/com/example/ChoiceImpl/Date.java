@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 public class Date implements Serializable{
     private int weight = -1, age = -1;
-    private String name, occupation, height;
+    private String name, occupation = "", height = "";
     private File picture = null; //Can be added later from viewDates?
 
     private int dateId; //Just which date this was in chronological order
