@@ -64,4 +64,6 @@ public class Date implements Serializable{
     public void setPicture(File picture) {
         this.picture = picture;
     }
+
+    public int getDateId() { return dateId; } //The order in which the dates were added
 }

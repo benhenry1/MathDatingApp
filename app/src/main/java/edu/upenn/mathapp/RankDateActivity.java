@@ -1,6 +1,7 @@
 package edu.upenn.mathapp;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -49,9 +50,10 @@ public class RankDateActivity extends AppCompatActivity {
 
         //We can set the current dudes value once and leave it
         ImageView thisPicture = (ImageView) findViewById(R.id.thisPic);
-        if (thisDate.getPicture() != null)
-            thisPicture.setImageBitmap(
-                    BitmapFactory.decodeFile(thisDate.getPicture().getAbsolutePath()));
+        if (thisDate.getPicture() != null) {
+            Bitmap b = BitmapFactory.decodeFile(thisDate.getPicture().getAbsolutePath());
+            thisPicture.setImageBitmap(b.createScaledBitmap(b, 100, 100, false));
+        }
 
         //Must have a name
         TextView  thisName    = (TextView)  findViewById(R.id.nameThis);
@@ -73,8 +75,12 @@ public class RankDateActivity extends AppCompatActivity {
         if (!thisDate.getOccupation().equals(""))
             thisOcc.setText(thisDate.getOccupation());
 
+        //Break back to home if this is the first date. Auto rank 1
         if (getEffectiveSize(dateList) == 0) {
-            DatingHomeActivity.insertDateAsRank(1, thisDate);
+            if ( !DatingHomeActivity.dateListContains(thisDate) )
+                DatingHomeActivity.insertDateAsRank(1, thisDate);
+            Intent homeIntent = new Intent(getApplicationContext(), DatingHomeActivity.class);
+            startActivity(homeIntent);
         }
         mainCompareLoop(1);
 
@@ -85,7 +91,8 @@ public class RankDateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (counter > dateList.size()) {
-                    DatingHomeActivity.insertDateAsRank(counter,thisDate);
+                    if ( !DatingHomeActivity.dateListContains(thisDate) )
+                        DatingHomeActivity.insertDateAsRank(counter,thisDate);
                     //TODO: AT some point, this will be when it calculates the r[] val and chooses a soulmate
                     //Unitl then, go back to dating home
                     Intent backHomeIntent = new Intent(getApplicationContext(), DatingHomeActivity.class);
@@ -99,7 +106,8 @@ public class RankDateActivity extends AppCompatActivity {
         thisButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                DatingHomeActivity.insertDateAsRank(counter, thisDate);
+                if ( !DatingHomeActivity.dateListContains(thisDate) )
+                    DatingHomeActivity.insertDateAsRank(counter, thisDate);
                 Intent backHomeIntent = new Intent(getApplicationContext(), DatingHomeActivity.class);
                 startActivity(backHomeIntent);
             }
@@ -117,7 +125,8 @@ public class RankDateActivity extends AppCompatActivity {
         Date otherDate = dateList.get(counter - 1); //its 0 indexed so subtract 1.
 
         if (otherDate == null) {
-            DatingHomeActivity.insertDateAsRank(counter, thisDate);
+            if ( !DatingHomeActivity.dateListContains(thisDate) )
+                DatingHomeActivity.insertDateAsRank(counter, thisDate);
             Intent homeIntent = new Intent(getApplicationContext(), DatingHomeActivity.class);
             startActivity(homeIntent);
             return;
@@ -135,7 +144,7 @@ public class RankDateActivity extends AppCompatActivity {
 
 
         if (thisDate.getAge() != -1) {
-            theirAge.setText(thisDate.getAge());
+            theirAge.setText(thisDate.getAge() + "yr");
         } else {
             theirAge.setText("");
         }
@@ -148,6 +157,8 @@ public class RankDateActivity extends AppCompatActivity {
         } else { theirWeight.setText(""); }
     }
 
+
+    //The arraylist size counts NULL elements-- count the nonnull elements
     public static int getEffectiveSize(ArrayList<Date> list) {
         int counter = 0;
 

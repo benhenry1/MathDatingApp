@@ -3,11 +3,14 @@ package edu.upenn.mathapp;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ChoiceImpl.Date;
+
+import java.io.File;
 
 /**
  * Created by Ben on 5/5/2017.
@@ -34,12 +37,21 @@ public class ViewDateActivity extends AppCompatActivity {
         if (d.getPicture() == null) {
             pic.setImageResource(R.drawable.nopic);
         } else {
-            Bitmap img = BitmapFactory.decodeFile(d.getPicture().getAbsolutePath());
-            pic.setImageBitmap(img);
+            if (d.getPicture().exists()) {
+                BitmapFactory.Options options = new BitmapFactory.Options();
+                options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                Bitmap bitmap = BitmapFactory.decodeFile(d.getPicture().getAbsolutePath(), options);
+                //pic.setImageBitmap(bitmap);
+
+
+                //Bitmap img = BitmapFactory.decodeFile(d.getPicture().getAbsolutePath());
+                //System.out.println(storageDir + " " + d.getPicture().getAbsolutePath());
+                pic.setImageBitmap(Bitmap.createScaledBitmap(bitmap, 125, 125, false));
+            }
         }
 
         //Guaranteed to have a name, we dont need to check
-        TextView name   = (TextView) findViewById(R.id.newName);
+        TextView name   = (TextView) findViewById(R.id.dateName);
         name.setText(d.getName());
 
 
@@ -60,7 +72,7 @@ public class ViewDateActivity extends AppCompatActivity {
             hasHeight = true;
         }
         TextView weight = (TextView) findViewById(R.id.dateWeight);
-        if ( d.getWeight() != -1 )
+        if ( d.getWeight() == -1 )
             weight.setText("");
         else {
             weight.setText(d.getWeight() + "lb");

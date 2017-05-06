@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="10dp">
 
     <TextView
         android:text="New Date"
@@ -17,9 +19,9 @@
         android:layout_height="121dp">
 
         <ImageView
-            android:layout_width="133dp"
-            android:layout_height="116dp"
-            android:id="@+id/newProfile" />
+            android:id="@+id/newProfile"
+            android:layout_width="125dp"
+            android:layout_height="125dp" />
 
         <Button
             android:text="Take A New Picture"
@@ -90,10 +92,10 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/newHeight"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:inputType="text" />
     </LinearLayout>
 
     <LinearLayout
@@ -112,10 +114,10 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/newWeight"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:inputType="numberDecimal" />
     </LinearLayout>
 
     <LinearLayout

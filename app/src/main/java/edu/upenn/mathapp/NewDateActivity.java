@@ -70,7 +70,8 @@ public class NewDateActivity extends AppCompatActivity {
         displayedPic = (ImageView) findViewById(R.id.newProfile);
 
         if ( picture != null ) {
-            displayedPic.setImageBitmap(BitmapFactory.decodeFile(picture.getAbsolutePath()));
+            Bitmap b = BitmapFactory.decodeFile(picture.getAbsolutePath());
+            displayedPic.setImageBitmap(b.createScaledBitmap(b, 125, 125, false));
         } else {
             displayedPic.setImageResource(R.drawable.nopic);
         }
@@ -164,8 +165,8 @@ public class NewDateActivity extends AppCompatActivity {
 
             // Continue only if the File was successfully created
             if (photoFile != null) {
-                //Uri photoURI = FileProvider.getUriForFile(getApplicationContext(), "edu.upenn.mathapp", photoFile);
-                //takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                Uri photoURI = FileProvider.getUriForFile(this, "edu.upenn.mathapp", photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 takePictureIntent.putExtra("date", folderName);
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
 

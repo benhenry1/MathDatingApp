@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -15,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,9 +30,8 @@ import java.util.ArrayList;
  */
 
 public class DatingHomeActivity extends AppCompatActivity {
-    private boolean firstRun = true;
+    private static boolean firstRun = true; //static so it keeps its state
     private final Context context = this;
-    private Date dateHack;
 
     private int numAvailableDates = 10; //the NumCandidates used in the future
 
@@ -40,7 +42,7 @@ public class DatingHomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dating_home);
 
-        if (true) {
+        if (firstRun) {
             firstRun = false; //TODO: Figure out details here. This isnt well thought out
             promptForInput();
             datesByPreferenceOrder = new ArrayList<Date>(numAvailableDates);
@@ -62,41 +64,62 @@ public class DatingHomeActivity extends AppCompatActivity {
         TextView datestotal= (TextView) findViewById(R.id.totalDates);
         datecount.setText("Date Count: " + RankDateActivity.getEffectiveSize(datesByPreferenceOrder));
         datestotal.setText("Total Dates: " + numAvailableDates);
+        int idSetter = 0;
         for (Date d : datesByPreferenceOrder) {
+
             if (d == null) continue;
-            RelativeLayout layout = new RelativeLayout(this);
-            dateHack = d; //This is so the onclick listener below can access the current date. IDK why it works but it does
+
+            LinearLayout layout = new LinearLayout(this);
+            layout.setOrientation(LinearLayout.HORIZONTAL);
+
+
             ImageButton profile = new ImageButton(this);
-            //TODO: Insert their picture if they have it. Default for now
-            profile.setImageResource(R.drawable.nopic);
-            profile.setLayoutParams(new RelativeLayout.LayoutParams(100, 100));
+            profile.setId(idSetter);
+
+            if (d.getPicture() == null || !d.getPicture().exists())
+                profile.setImageResource(R.drawable.nopic);
+            else {
+                Bitmap b = BitmapFactory.decodeFile(d.getPicture().getAbsolutePath());
+                profile.setImageBitmap(b.createScaledBitmap(b, 200, 200, false));
+            }
+            profile.setLayoutParams(new LinearLayout.LayoutParams(200, 200));
 
             profile.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent viewDate = new Intent(getApplicationContext(), ViewDateActivity.class);
-                    viewDate.putExtra("Date", dateHack);
-                    startActivity(viewDate);
+                    if (datesByPreferenceOrder.get(v.getId()) != null) {
+                        viewDate.putExtra("Date", datesByPreferenceOrder.get(v.getId()));
+                        startActivity(viewDate);
+                    }
                 }
             });
 
             TextView name = new TextView(this);
             name.setText(d.getName());
+            name.setLayoutParams(new LinearLayout.LayoutParams(200, 200));
 
             TextView age = new TextView(this);
-            age.setText(d.getAge());
+            if (d.getAge() != -1)
+                age.setText(d.getAge() + "yr");
+            else
+                age.setText("");
+            age.setLayoutParams(new LinearLayout.LayoutParams(200, 200));
 
-            TextView occupation = new TextView(this);
+            TextView occupation = new TextView(this); //fine no check needed
             occupation.setText(d.getOccupation());
+            occupation.setLayoutParams(new LinearLayout.LayoutParams(200, 200));
 
             TextView relRank = new TextView(this);
-            relRank.setText(datesByPreferenceOrder.indexOf(d));
+            relRank.setText(datesByPreferenceOrder.indexOf(d) + "");
 
             layout.addView(profile);
             layout.addView(name);
             layout.addView(age);
             layout.addView(occupation);
             dates.addView(layout);
+
+            idSetter++;
         }
 
         Button newDate = (Button) findViewById(R.id.newDate);
@@ -168,8 +191,9 @@ public class DatingHomeActivity extends AppCompatActivity {
 
     }
 
-    public ArrayList<Date> getDateList() {
+    public static ArrayList<Date> getDateList() {
         return datesByPreferenceOrder;
     }
+    public static boolean         dateListContains(Date d) { return datesByPreferenceOrder.contains(d); }
 
 }
