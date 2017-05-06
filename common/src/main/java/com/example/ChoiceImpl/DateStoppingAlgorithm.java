@@ -71,7 +71,7 @@ public class DateStoppingAlgorithm extends ChoiceAlgorithm {
     //RET TRUE if this is the stopping element
     public boolean addNewDate(Date d, int relrank) {
         datesInChronoOrder.add(d);
-        if (relrank < s[datesInChronoOrder.size()])
+        if (relrank < s[datesInChronoOrder.size() - 1]) //RR 1 indexed, dates 0 indexed
             return true;
         return false;
     }

@@ -33,9 +33,11 @@ import java.util.ArrayList;
 public class DatingHomeActivity extends AppCompatActivity {
     private static boolean firstRun = true; //static so it keeps its state
     public static DateStoppingAlgorithm stoppingAlgorithm;
-    private final Context context = this;
 
-    private int numAvailableDates = 10; //the NumCandidates used in the future
+    private final Context context = this;
+    private TextView dateCount, datesTotal;
+
+    private static int numAvailableDates = 10; //the NumCandidates used in the future
 
     private static ArrayList<Date> datesByPreferenceOrder;
 
@@ -45,10 +47,10 @@ public class DatingHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dating_home);
 
         if (firstRun) {
-            firstRun = false; //TODO: Figure out details here. This isnt well thought out
-            stoppingAlgorithm = new DateStoppingAlgorithm(numAvailableDates);
+            firstRun = false; //TODO: This only works over 1 app run. make global somehow. write to file?
             promptForInput();
             datesByPreferenceOrder = new ArrayList<Date>(numAvailableDates);
+            stoppingAlgorithm = new DateStoppingAlgorithm(numAvailableDates);
 
             //init arraylist with nulls apparently
             int i = 0;
@@ -63,10 +65,10 @@ public class DatingHomeActivity extends AppCompatActivity {
         /*********************Programmatically list all dates**********************/
 
         LinearLayout dates = (LinearLayout) findViewById(R.id.dateList);
-        TextView datecount = (TextView) findViewById(R.id.dateCount);
-        TextView datestotal= (TextView) findViewById(R.id.totalDates);
-        datecount.setText("Date Count: " + RankDateActivity.getEffectiveSize(datesByPreferenceOrder));
-        datestotal.setText("Total Dates: " + numAvailableDates);
+        dateCount = (TextView) findViewById(R.id.dateCount);
+        datesTotal= (TextView) findViewById(R.id.totalDates);
+        dateCount.setText("Date Count: " + RankDateActivity.getEffectiveSize(datesByPreferenceOrder));
+        datesTotal.setText("Total Dates: " + numAvailableDates);
         int idSetter = 0;
         for (Date d : datesByPreferenceOrder) {
 
@@ -167,13 +169,9 @@ public class DatingHomeActivity extends AppCompatActivity {
                                 // edit text
                                 String in = userInput.getText().toString();
                                 if (in.equals("")) {
-                                    Toast.makeText(getApplicationContext(),
-                                            "We defaulted the choice to 10.",
-                                            Toast.LENGTH_LONG)
-                                            .show();
-                                    numAvailableDates = 10;
+                                    userCanceled();
                                 } else {
-                                    numAvailableDates = Integer.parseInt(in);
+                                    userSubmit(Integer.parseInt(in));
                                 }
 
                             }
@@ -181,7 +179,7 @@ public class DatingHomeActivity extends AppCompatActivity {
                 .setNegativeButton("Cancel",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
+                                userCanceled();
                             }
                         });
 
@@ -190,8 +188,24 @@ public class DatingHomeActivity extends AppCompatActivity {
 
         // show it
         alertDialog.show();
+    }
 
+    private void userCanceled() {
+        Toast.makeText(getApplicationContext(),
+                "We defaulted the choice to 10.",
+                Toast.LENGTH_LONG)
+                .show();
+        numAvailableDates = 10;
+        datesTotal.setText("Total Dates: " + numAvailableDates);
+    }
 
+    private void userSubmit(int in) {
+        if (in > 0)
+            numAvailableDates = in;
+        else
+            userCanceled();
+
+        datesTotal.setText("Total Dates: " + numAvailableDates);
     }
 
     public static ArrayList<Date> getDateList() {

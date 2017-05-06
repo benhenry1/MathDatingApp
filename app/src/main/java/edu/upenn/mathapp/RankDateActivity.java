@@ -39,6 +39,7 @@ public class RankDateActivity extends AppCompatActivity {
 
         thisDate = (Date) getIntent().getSerializableExtra("Date");
         dateList = (ArrayList<Date>) getIntent().getSerializableExtra("Dates");
+        System.out.println(thisDate);
 
 
         //These all to be updated on each iter
@@ -162,8 +163,8 @@ public class RankDateActivity extends AppCompatActivity {
 
 
     private void submit(int rank, Date d) {
-        //if ( !DatingHomeActivity.dateListContains(d) ) {
-        Intent homeIntent;
+        Intent homeIntent = null;
+        if ( !DatingHomeActivity.dateListContains(d) ) {
             DatingHomeActivity.insertDateAsRank(rank, d);
 
             if (DatingHomeActivity.stoppingAlgorithm.addNewDate(d, rank)) {//This returns whether or not this is the stopping element
@@ -174,7 +175,7 @@ public class RankDateActivity extends AppCompatActivity {
                 homeIntent = new Intent(this, DatingHomeActivity.class);
             }
 
-        //}
+        }
 
         startActivity(homeIntent);
     }
