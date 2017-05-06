@@ -31,6 +31,8 @@ import java.util.ArrayList;
  */
 
 public class DatingHomeActivity extends AppCompatActivity {
+    //private static File dateFile;
+
     private static boolean firstRun = true; //static so it keeps its state
     private boolean pauseforinput = true;
     public static DateStoppingAlgorithm stoppingAlgorithm;
