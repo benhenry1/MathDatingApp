@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.ChoiceImpl.Date;
+import com.example.ChoiceImpl.DateStoppingAlgorithm;
 
 import java.util.ArrayList;
 
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 
 public class DatingHomeActivity extends AppCompatActivity {
     private static boolean firstRun = true; //static so it keeps its state
+    public static DateStoppingAlgorithm stoppingAlgorithm;
     private final Context context = this;
 
     private int numAvailableDates = 10; //the NumCandidates used in the future
@@ -44,6 +46,7 @@ public class DatingHomeActivity extends AppCompatActivity {
 
         if (firstRun) {
             firstRun = false; //TODO: Figure out details here. This isnt well thought out
+            stoppingAlgorithm = new DateStoppingAlgorithm(numAvailableDates);
             promptForInput();
             datesByPreferenceOrder = new ArrayList<Date>(numAvailableDates);
 
@@ -127,7 +130,7 @@ public class DatingHomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent newDateIntent = new Intent(getApplicationContext(), NewDateActivity.class);
-                newDateIntent.putExtra("NumDates", datesByPreferenceOrder.size());
+                newDateIntent.putExtra("NumDates", RankDateActivity.getEffectiveSize(datesByPreferenceOrder));
                 newDateIntent.putExtra("Dates", datesByPreferenceOrder);
                 startActivity(newDateIntent);
             }
@@ -195,5 +198,6 @@ public class DatingHomeActivity extends AppCompatActivity {
         return datesByPreferenceOrder;
     }
     public static boolean         dateListContains(Date d) { return datesByPreferenceOrder.contains(d); }
+    public static int             getRankOf(Date d) { return datesByPreferenceOrder.indexOf(d); }
 
 }

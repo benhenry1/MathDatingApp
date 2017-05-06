@@ -105,7 +105,7 @@ public class NewDateActivity extends AppCompatActivity {
 
     private boolean validateForm() {
         return !name.getText().toString().equals("");
-    }
+    } //Only reqt is to have a name
 
     //Create the date object, move to relative ranking page
     private void submitForm() {
@@ -132,7 +132,7 @@ public class NewDateActivity extends AppCompatActivity {
             d.setPicture(picture);
         }
 
-        Intent rankIntent = new Intent(getApplicationContext(), RankDateActivity.class/*TODO: Rank Activity*/);
+        Intent rankIntent = new Intent(getApplicationContext(), RankDateActivity.class);
         rankIntent.putExtra("Date", d);
         rankIntent.putExtra("Dates", dates); //Sorry for bad naming. Date is the newly created, dates is the list of all dates
         startActivity(rankIntent);
