@@ -152,6 +152,16 @@ public class DatingHomeActivity extends AppCompatActivity {
                 startActivity(newDateIntent);
             }
         });
+
+        Button goHome = (Button) findViewById(R.id.mainHomeButton);
+        goHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goHome = new Intent(getApplicationContext(), MainActivity.class);
+                goHome.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(goHome);
+            }
+        });
     }
 
 

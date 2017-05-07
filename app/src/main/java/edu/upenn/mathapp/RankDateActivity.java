@@ -27,7 +27,7 @@ public class RankDateActivity extends AppCompatActivity {
     private ArrayList<Date> dateList;
 
     ImageView theirPicture;
-    TextView theirName, theirAge, theirHeight, theirWeight, theirOcc;
+    TextView theirName, theirAge, theirHeight, theirOcc;
 
     int counter = 1; //so the OnClickListeners can see the counter
 
@@ -48,7 +48,6 @@ public class RankDateActivity extends AppCompatActivity {
         theirName    = (TextView)  findViewById(R.id.nameOther);
         theirAge     = (TextView)  findViewById(R.id.theirAge);
         theirHeight  = (TextView)  findViewById(R.id.theirHeight);
-        theirWeight  = (TextView)  findViewById(R.id.theirWeight);
         theirOcc     = (TextView)  findViewById(R.id.theirOcc);
 
         //We can set the current dudes value once and leave it
@@ -69,10 +68,6 @@ public class RankDateActivity extends AppCompatActivity {
         TextView  thisHeight  = (TextView)  findViewById(R.id.thisHeight);
         if (!thisDate.getHeight().equals(""))
             thisHeight.setText(thisDate.getHeight());
-
-        TextView  thisWeight  = (TextView)  findViewById(R.id.thisWeight);
-        if (thisDate.getWeight() != -1)
-            thisWeight.setText(thisDate.getWeight() + "lb");
 
         TextView  thisOcc     = (TextView)  findViewById(R.id.thisOcc);
         if (!thisDate.getOccupation().equals(""))
@@ -143,9 +138,6 @@ public class RankDateActivity extends AppCompatActivity {
         theirHeight.setText(otherDate.getHeight()); //If theres no height itll push the empty string for us
         theirOcc.setText(otherDate.getOccupation());
 
-        if (thisDate.getWeight() != -1) {
-            theirWeight.setText(otherDate.getWeight() + "lb");
-        } else { theirWeight.setText(""); }
     }
 
 
@@ -171,9 +163,10 @@ public class RankDateActivity extends AppCompatActivity {
 
             if (DatingHomeActivity.stoppingAlgorithm.addNewDate(d, rank)
                     || (getEffectiveSize(dateList) >= DatingHomeActivity.numAvailableDates)) {//This returns whether or not this is the stopping element
-                homeIntent = new Intent(this, ViewDateActivity.class);
+                Toast.makeText(getApplicationContext(),"Congratulations! It turns out that " + d.getName() + " is your soulmate!", Toast.LENGTH_LONG).show();
+                homeIntent = new Intent(this, OptimalDateActivity.class);
                 homeIntent.putExtra("Date", d);
-                Toast.makeText(getApplicationContext(),"Congratulations! It turns out that " + d.getName() + " is your soulmate!", Toast.LENGTH_LONG);
+
             } else {
                 homeIntent = new Intent(this, DatingHomeActivity.class);
             }

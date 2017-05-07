@@ -118,7 +118,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
-            // TODO: handle tap here
             if ( viewFlipper.getCurrentView().getId() == R.id.love ) {
                 //handle
             } else if ( viewFlipper.getCurrentView().getId() == R.id.stats ) {
@@ -128,9 +127,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-    /******************Read/Write Dates From
-    File***************************/
 
 
 }

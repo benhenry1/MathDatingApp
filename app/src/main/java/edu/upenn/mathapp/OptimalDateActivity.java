@@ -5,34 +5,31 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Button;
+import android.widget.Toast;
+
+import android.content.Intent;
 
 import com.example.ChoiceImpl.Date;
 
 import java.io.File;
 
 /**
- * Created by Ben on 5/5/2017.
+ * Created by Ben on 5/7/2017.
  */
 
-public class ViewDateActivity extends AppCompatActivity {
+public class OptimalDateActivity extends AppCompatActivity {
     private Date d;
-
-    //These bools will be used to give the user an option to provide more detail after the init screen
-    private boolean hasAge = false, hasHeight = false, hasOcc = false;
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_date);
+        setContentView(R.layout.activity_optimal_date);
+        d = (Date) getIntent().getSerializableExtra("Date");
 
-        this.d = (Date) getIntent().getSerializableExtra("Date");
-
-        //Find all the text views and update them
-
+        //Get all the buttons
         ImageView pic = (ImageView) findViewById(R.id.dateImage);
         if (d.getPicture() == null) {
             pic.setImageResource(R.drawable.nopic);
@@ -61,7 +58,6 @@ public class ViewDateActivity extends AppCompatActivity {
         }
         else {
             age.setText(d.getAge() + "yr");
-            hasAge = true;
         }
         //If height is unset it will be the empty string
         TextView height = (TextView) findViewById(R.id.dateHeight);
@@ -69,7 +65,6 @@ public class ViewDateActivity extends AppCompatActivity {
             height.setText("");
         else {
             height.setText(d.getHeight());
-            hasHeight = true;
         }
 
         TextView occ    = (TextView) findViewById(R.id.dateOccupation);
@@ -77,11 +72,42 @@ public class ViewDateActivity extends AppCompatActivity {
             occ.setText("");
         else {
             occ.setText(d.getOccupation());
-            hasOcc = true;
         }
 
-        //TODO: Give user buttons to add unadded parameters
+        Button finish = (Button) findViewById(R.id.finishDatingButton);
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent backHomeIntent = new Intent(getApplicationContext(), MainActivity.class);
+                backHomeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                //Show thanks toast
+                Toast.makeText(getApplicationContext(), "Thanks for using the Math Of Choice Dating App", Toast.LENGTH_LONG).show();
+                //Clear all date data
+                deleteLocalData();
+
+                startActivity(backHomeIntent);
+            }
+        });
+
+
 
     }
+
+
+    //Not referenced rn, but when called deletes all dates and pictures
+    private void deleteLocalData() {
+        File path = new File(getFilesDir() + "/dates.txt");
+        File pics = new File(Environment.DIRECTORY_PICTURES);
+
+        for (int i = 0; i < 100; i++) {
+            File fol = new File(pics.getAbsolutePath() + "/date" + i);
+            if (fol != null)
+                fol.delete();
+        }
+        path.delete();
+        pics.delete();
+
+    }
+
 
 }
