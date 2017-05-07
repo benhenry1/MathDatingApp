@@ -74,7 +74,6 @@ public class MathOfChoice extends ChoiceAlgorithm {
 				sum += (double)Math.pow((j-1), -1);
 			}
 			thisChance = mul * sum;
-			/*System.out.println(numCandidates + ": " + thisChance + " = " + mul + " * " + sum);*/
 			if (thisChance > maxChance) {
 				maxChance = thisChance;
 				maxR = r;
@@ -82,8 +81,6 @@ public class MathOfChoice extends ChoiceAlgorithm {
 		}
 		this.optimalR = maxR;
 		this.chanceOfMaxRank = maxChance;
-		//System.out.println(maxChance + "% at r = " + maxR);
-		//return maxChance;
 	}
 
 	private void optimalChoiceAlgorithm(int optimalR) {
