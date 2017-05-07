@@ -10,7 +10,8 @@ import java.util.zip.CheckedOutputStream;
 
 public class DateStoppingAlgorithm extends ChoiceAlgorithm {
     private int numCandidates;
-    private LinkedList<Date> datesInChronoOrder;
+    private static LinkedList<Date> datesInChronoOrder;
+    private static int numDates;
 
     private double[] c;
     private int[] s;
@@ -29,7 +30,7 @@ public class DateStoppingAlgorithm extends ChoiceAlgorithm {
         tentCVal[numCandidates - 1] = (numCandidates + 1) / 2;
         //System.out.println(numCandidates + " NC")
         this.s = new int[numCandidates];
-        s[numCandidates - 1] = (int)((numCandidates + 1) / 2); //init with s_n-1
+        s[numCandidates - 1] = (int)(numCandidates); //init with s_n
 
         for (int i = numCandidates - 2; i >= 0; i--) { //n-2 -> 0
             //System.out.println("Calculating c[" + i + "]");
@@ -70,13 +71,20 @@ public class DateStoppingAlgorithm extends ChoiceAlgorithm {
 
     //RET TRUE if this is the stopping element
     public boolean addNewDate(Date d, int relrank) {
-        datesInChronoOrder.add(d);
-        System.out.println("relrank, s " + relrank + " " + s[datesInChronoOrder.size()] + " " + datesInChronoOrder.size());
-        if (relrank <= s[datesInChronoOrder.size()]) //RR 1 indexed, dates 0 indexed
+        //boolean b = datesInChronoOrder.add(d);
+        if (d == null)
+            return false;
+
+        numDates++;
+        System.out.println("relrank, s " + relrank + " " + s[numDates - 1] + " " + numDates);
+
+        if (relrank <= s[numDates - 1]) //RR 1 indexed, dates 0 indexed
             return true;
         return false;
     }
-
+    public void setNumDates(int numDates) {
+        this.numDates = numDates;
+    }
     @Override
     public double getChosenValue() {
         return 0;

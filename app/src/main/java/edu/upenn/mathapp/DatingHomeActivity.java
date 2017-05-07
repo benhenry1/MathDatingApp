@@ -47,12 +47,11 @@ public class DatingHomeActivity extends AppCompatActivity {
     private static ArrayList<Date> datesByPreferenceOrder;
 
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dating_home);
         dateCount = (TextView) findViewById(R.id.dateCount);
         datesTotal= (TextView) findViewById(R.id.totalDates);
-
+        //deleteLocalData(); //Deletes all dates, pics
         if (firstRun) {
             firstRun = false; //TODO: This only works over 1 app run. make global somehow. write to file?
             datesByPreferenceOrder = new ArrayList<Date>(numAvailableDates);
@@ -81,6 +80,7 @@ public class DatingHomeActivity extends AppCompatActivity {
 
         System.out.println(numAvailableDates);
         stoppingAlgorithm = new DateStoppingAlgorithm(numAvailableDates);
+        stoppingAlgorithm.setNumDates(RankDateActivity.getEffectiveSize(datesByPreferenceOrder));
         /*********************Programmatically list all dates**********************/
 
 
@@ -297,7 +297,7 @@ public class DatingHomeActivity extends AppCompatActivity {
     }
 
     private File recoverPicture(Date d) {
-        if (d == null)
+        if (d == null || !d.hasPicture())
             return null;
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File parentDir = new File(storageDir.getAbsolutePath() + "/date" + d.getDateId());
@@ -306,7 +306,7 @@ public class DatingHomeActivity extends AppCompatActivity {
         File[] files = parentDir.listFiles();
         if (files != null) {
             for (File file : files) {
-                if (file.getName().endsWith(".jpg")) {
+                if (file.getName().endsWith(".jpg") & file.getName().contains("date" + d.getDateId())) {
                     return file;
                 }
             }
@@ -341,6 +341,20 @@ public class DatingHomeActivity extends AppCompatActivity {
         }catch(IOException i) {
             i.printStackTrace();
         }
+    }
+
+    //Not referenced rn, but when called deletes all dates and pictures
+    private void deleteLocalData() {
+        File path = new File(getFilesDir() + "/dates.txt");
+        File pics = new File(Environment.DIRECTORY_PICTURES);
+
+        for (int i = 0; i < numAvailableDates; i++) {
+            File fol = new File(pics.getAbsolutePath() + "/date" + i);
+            fol.delete();
+        }
+        path.delete();
+        pics.delete();
+
     }
 
 

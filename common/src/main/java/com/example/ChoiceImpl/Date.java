@@ -11,7 +11,8 @@ import java.io.Serializable;
 public class Date implements Serializable {
     private int weight = -1, age = -1;
     private String name, occupation = "", height = "";
-    private File picture = null; //Can be added later from viewDates?
+    private File picture = null; //Can be added later from viewDates?\
+    private boolean hasPicture = false;
 
     private int dateId; //Just which date this was in chronological order
 
@@ -67,4 +68,7 @@ public class Date implements Serializable {
     }
 
     public int getDateId() { return dateId; } //The order in which the dates were added
+
+    public void setHasPicture(Boolean b) { this.hasPicture = b; }
+    public Boolean hasPicture() { return hasPicture; }
 }

@@ -130,6 +130,7 @@ public class NewDateActivity extends AppCompatActivity {
 
         if ( picture != null ) {
             d.setPicture(picture);
+            d.setHasPicture(true);
         }
 
         Intent rankIntent = new Intent(getApplicationContext(), RankDateActivity.class);
