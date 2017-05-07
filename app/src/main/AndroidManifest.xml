@@ -2,13 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.upenn.mathapp">
 
-    <!--Permissions-->
+    <!-- Permissions -->
     <uses-feature
         android:name="android.hardware.camera"
         android:required="true" />
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
 
     <application
         android:allowBackup="true"
@@ -25,6 +25,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,23 +33,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StatisticsHomeActivity" >
-
-        </activity>
-        <activity android:name=".GatherStatisticsActivity"></activity>
-        <activity android:name=".DatingHomeActivity">
-        </activity>
-        <activity android:name=".NewDateActivity">
-        </activity>
-        <activity android:name=".ViewDateActivity">
-        </activity>
-        <activity android:name=".RankDateActivity">
-        </activity>
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <activity android:name=".StatisticsHomeActivity"></activity>
+        <activity android:name=".GatherStatisticsActivity" />
+        <activity android:name=".DatingHomeActivity"></activity>
+        <activity android:name=".NewDateActivity"></activity>
+        <activity android:name=".ViewDateActivity"></activity>
+        <activity android:name=".RankDateActivity"></activity>
+        <!--
+     ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
+        -->
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".NumberOfDatesActivity"></activity>
     </application>
 
 </manifest>

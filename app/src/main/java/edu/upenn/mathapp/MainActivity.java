@@ -5,16 +5,26 @@ import android.content.Intent;
 import android.gesture.Gesture;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.content.SharedPreferences;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ViewFlipper;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity {
     private ViewFlipper viewFlipper;
     private GestureDetector gestureDetector;
     private float lastX;
+    private int visited = 0;
+    private int numberOfDates = 10;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] STORAGE_PERMISSIONS = {
             Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -24,6 +34,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FileInputStream fis = null;
+        try {
+            fis = openFileInput("hello.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (fis == null) {
+
+        }
+        else {
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader bufferedReader = new BufferedReader(isr);
+            try {
+                visited = Integer.parseInt(bufferedReader.readLine());
+                numberOfDates = Integer.parseInt(bufferedReader.readLine());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
 
         viewFlipper = (ViewFlipper) findViewById(R.id.viewflipper);
@@ -43,8 +73,28 @@ public class MainActivity extends AppCompatActivity {
         loveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent loveIntent = new Intent(getApplicationContext(), DatingHomeActivity.class);
-                startActivity(loveIntent);
+                //if have not been visited
+                if (visited == 0) {
+                    Intent loveIntent = new Intent(getApplicationContext(), DatingHomeActivity.class);
+                    startActivity(loveIntent);
+
+                    String filename = "visited";
+
+                    FileOutputStream fos = null;
+                    try {
+                        fos = openFileOutput(filename, MODE_PRIVATE);
+                        fos.write(1);
+                        fos.close();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                //if have been visited
+                Intent newloveIntent = new Intent(getApplicationContext(), NumberOfDatesActivity.class);
+                newloveIntent.putExtra("number",  numberOfDates);
+                startActivity(newloveIntent);
             }
         });
 

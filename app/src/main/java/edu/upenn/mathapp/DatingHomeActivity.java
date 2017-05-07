@@ -48,10 +48,10 @@ public class DatingHomeActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dating_home);
+        numAvailableDates = getIntent().getIntExtra("number", 0);
 
         if (firstRun) {
             firstRun = false; //TODO: This only works over 1 app run. make global somehow. write to file?
-            promptForInput();
             System.out.println(numAvailableDates);
             datesByPreferenceOrder = new ArrayList<Date>(numAvailableDates);
 
@@ -157,7 +157,7 @@ public class DatingHomeActivity extends AppCompatActivity {
     }
 
 
-    private void promptForInput() {
+    /*private void promptForInput() {
         LayoutInflater li = LayoutInflater.from(context);
         View promptsView = li.inflate(R.layout.date_preference_prompt, null);
 
@@ -199,7 +199,7 @@ public class DatingHomeActivity extends AppCompatActivity {
 
         // show it
         alertDialog.show();
-    }
+    }*/
 
     private void userCanceled() {
         Toast.makeText(getApplicationContext(),

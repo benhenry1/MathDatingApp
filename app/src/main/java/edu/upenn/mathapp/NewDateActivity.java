@@ -26,10 +26,10 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import static edu.upenn.mathapp.PhotoActivity.REQUEST_IMAGE_CAPTURE;
 import static edu.upenn.mathapp.R.attr.height;
 //import java.util.Date;
 //import java.util.Locale;
+import static edu.upenn.mathapp.PhotoActivity.REQUEST_IMAGE_CAPTURE;
 
 /**
  * Created by Ben on 5/5/2017.
@@ -49,7 +49,7 @@ public class NewDateActivity extends AppCompatActivity {
     private ArrayList<Date> dates; //To be passed onto next activity
 
     //Fields needed for validation (Name is the only req field
-    EditText name, age, weight, occ, height;
+    EditText name, age, occ, height;
     ImageView displayedPic;
 
     @Override
@@ -78,8 +78,6 @@ public class NewDateActivity extends AppCompatActivity {
         name = (EditText) findViewById(R.id.newName);
 
         age = (EditText) findViewById(R.id.newAge);
-
-        weight = (EditText) findViewById(R.id.newWeight);
 
         occ = (EditText) findViewById(R.id.newOcc);
 
@@ -113,8 +111,7 @@ public class NewDateActivity extends AppCompatActivity {
 
         String  agetext    = age.getText().toString(),
                 heighttext = height.getText().toString(),
-                occtext    = occ.getText().toString(),
-                weighttext = weight.getText().toString();
+                occtext    = occ.getText().toString();
         if ( !agetext.equals("") ) {
             d.setAge(Integer.parseInt(agetext));
         }
@@ -123,9 +120,6 @@ public class NewDateActivity extends AppCompatActivity {
         }
         if ( !occtext.equals("") ) {
             d.setOccupation(occtext);
-        }
-        if ( !weighttext.equals("") ) {
-            d.setWeight(Integer.parseInt(weighttext));
         }
 
         if ( picture != null ) {
