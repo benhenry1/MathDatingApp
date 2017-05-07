@@ -91,7 +91,8 @@ public class OptimalDateActivity extends AppCompatActivity {
                 //Clear all date data
 
                 //resetApp();
-
+                deleteLocalData();
+                DatingHomeActivity.firstRun = true;
                 startActivity(backHomeIntent);
             }
         });

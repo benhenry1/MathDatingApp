@@ -84,7 +84,6 @@ public class MathOfChoice extends ChoiceAlgorithm {
 	}
 
 	private void optimalChoiceAlgorithm(int optimalR) {
-		/*System.out.println("*************************OPTCHOICE***********************************************");*/
 		int counter = 0;
 		double currOptimal = -1;
 		int posOfCurrOptimal = 0;
@@ -93,7 +92,6 @@ public class MathOfChoice extends ChoiceAlgorithm {
 		int posBeforeR = 0;
 
 		while (counter < candidates.length) {
-			/*System.out.println("Debug: " + counter + " " + optimalR);*/
 				if (counter > optimalR) {
 						if (candidates[counter] >= optBeforeR) {
 							currOptimal = candidates[counter];
@@ -111,13 +109,8 @@ public class MathOfChoice extends ChoiceAlgorithm {
 							//Not past optimalR and this isn't a local max. do nothing
 						}
 				}
-
-			
 			counter++;
 		}
-
-		//System.out.println(counter + ": " + currOptimal + " " + optBeforeR + " index " + posOfCurrOptimal + " " + posBeforeR);
-		
 		if (currOptimal > 0) {
 			this.maxEltFound =  currOptimal;
 			this.maxEltFoundIndex = posOfCurrOptimal;
@@ -129,7 +122,6 @@ public class MathOfChoice extends ChoiceAlgorithm {
 		this.maxEltFoundIndexWithinR = posBeforeR;
         int rankOfAnswer = getRankOf(maxEltFoundIndex, candidates);
         this.maxEltRank = rankOfAnswer;
-		//return posOfCurrOptimal;
 	}
 
 	private void printStatistics() {

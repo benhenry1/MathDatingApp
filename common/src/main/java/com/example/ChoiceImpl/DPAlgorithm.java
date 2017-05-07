@@ -57,7 +57,7 @@ public class DPAlgorithm extends ChoiceAlgorithm {
 		tentCVal[numCandidates - 1] = (numCandidates + 1.0) / 2.0;
 
 		this.s = new int[numCandidates];
-		s[numCandidates - 1] = (int)(numCandidates); //init with s_n-1 TODO: Nothing to do, marking this. In the paper is says S[n] = n and i had n/2
+		s[numCandidates - 1] = (int)(numCandidates); //init with s_n
 
 		for (int i = numCandidates - 2; i >= 0; i--) { //n-2 -> 0
 			//get ci
@@ -70,7 +70,6 @@ public class DPAlgorithm extends ChoiceAlgorithm {
 			//get si
 			int si = (int) (((i+(1.0))/(numCandidates+(1.0))) * ci);
 			s[i] = si;
-			//System.out.println(tentCVal[i] + " " + s[i]);
 		}
 		return tentCVal;
 	}

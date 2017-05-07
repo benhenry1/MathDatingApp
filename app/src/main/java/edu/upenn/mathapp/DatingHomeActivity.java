@@ -35,7 +35,7 @@ import java.util.ArrayList;
 public class DatingHomeActivity extends AppCompatActivity {
     private static File dateFile = new File("dates.txt");
 
-    private static boolean firstRun = true; //static so it keeps its state
+    public static boolean firstRun = true; //static so it keeps its state
     private boolean pauseforinput = true;
     public static DateStoppingAlgorithm stoppingAlgorithm;
 
@@ -57,7 +57,7 @@ public class DatingHomeActivity extends AppCompatActivity {
         datesTotal = (TextView) findViewById(R.id.totalDates);
 
         if (firstRun) {
-            firstRun = false; //TODO: This only works over 1 app run. make global somehow. write to file?
+            firstRun = false;
             //System.out.println(numAvailableDates);
 
             //deleteLocalData(); //Deletes all dates, pics
