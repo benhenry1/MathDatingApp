@@ -77,11 +77,13 @@ public class OptimalDateActivity extends AppCompatActivity {
             occ.setText(d.getOccupation());
         }
 
+        deleteLocalData();
+        resetApp();
+
         Button finish = (Button) findViewById(R.id.finishDatingButton);
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteLocalData();
                 Intent backHomeIntent = new Intent(getApplicationContext(), MainActivity.class);
                 backHomeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 //Show thanks toast
@@ -103,30 +105,33 @@ public class OptimalDateActivity extends AppCompatActivity {
     private void deleteLocalData() {
         File path = new File(getFilesDir() + "/dates.txt");
         File pics = new File(Environment.DIRECTORY_PICTURES);
-        //File data = new File(getFilesDir() + "/data.txt");
-
         for (int i = 0; i < 100; i++) {
             File fol = new File(pics.getAbsolutePath() + "/date" + i);
             if (fol != null)
                 fol.delete();
         }
-        path.delete();
-        pics.delete();
+        try {
+            path.getCanonicalFile().delete();
+            pics.getCanonicalFile().delete();
+        }
+        catch (IOException i) {
+            i.printStackTrace();
+        }
         //data.delete();
-
     }
 
     //Not referenced rn, but when called deletes all dates and pictures
     private void resetApp() {
         try {
             File path = new File(getFilesDir() + "/data.txt");
-            FileOutputStream fileOut =
+        path.getCanonicalFile().delete();
+          /*  FileOutputStream fileOut =
                     new FileOutputStream(path);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeBoolean(false);
             out.writeInt(0);
             out.close();
-            fileOut.close();
+            fileOut.close();*/
         }catch(IOException i) {
             i.printStackTrace();
         }
