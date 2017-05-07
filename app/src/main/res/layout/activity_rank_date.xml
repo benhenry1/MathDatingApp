@@ -35,28 +35,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView8"
-                android:layout_weight="1.38" />
+                android:layout_weight="1.09" />
 
             <TextView
                 android:text="Height"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView7"
-                android:layout_weight="1.13" />
-
-            <TextView
-                android:text="Weight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView6"
-                android:layout_weight="1" />
+                android:layout_weight="0.96" />
 
             <TextView
                 android:text="Occupation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView5"
-                android:layout_weight="0.42" />
+                android:layout_weight="0.65" />
         </LinearLayout>
 
         <LinearLayout
@@ -74,12 +67,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/theirHeight"
-                android:layout_weight="1" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/theirWeight"
                 android:layout_weight="1" />
 
             <TextView
@@ -142,13 +129,6 @@
                 android:layout_weight="1.13" />
 
             <TextView
-                android:text="Weight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView61"
-                android:layout_weight="1" />
-
-            <TextView
                 android:text="Occupation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -171,12 +151,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/thisHeight"
-                android:layout_weight="1" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/thisWeight"
                 android:layout_weight="1" />
 
             <TextView

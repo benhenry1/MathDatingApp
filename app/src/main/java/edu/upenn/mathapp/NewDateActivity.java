@@ -124,6 +124,7 @@ public class NewDateActivity extends AppCompatActivity {
 
         if ( picture != null ) {
             d.setPicture(picture);
+            d.setHasPicture(true);
         }
 
         Intent rankIntent = new Intent(getApplicationContext(), RankDateActivity.class);
@@ -202,11 +203,13 @@ public class NewDateActivity extends AppCompatActivity {
                         "Picture saved.",
                         Toast.LENGTH_SHORT);
                 t.show();
+                System.out.println(picture.getAbsolutePath());
                 displayedPic.setImageBitmap(BitmapFactory.decodeFile(picture.getAbsolutePath()));
                 displayedPic.invalidate();
             }
         }
     }
+
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.

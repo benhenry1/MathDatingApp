@@ -11,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ViewFlipper;
+import android.content.SharedPreferences;
+
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -166,7 +168,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
-            // TODO: handle tap here
             if ( viewFlipper.getCurrentView().getId() == R.id.love ) {
                 //handle
             } else if ( viewFlipper.getCurrentView().getId() == R.id.stats ) {
@@ -175,5 +176,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     }
+
+
 
 }

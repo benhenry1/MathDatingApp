@@ -20,21 +20,6 @@ public class DPAlgorithm extends ChoiceAlgorithm {
 		this.optimal    = getOptimalValue();
 
 		//printStatistics();
-
-		//Debug from here out
-		/*String cs = "";String ss = ""; String rrs = ""; String candidatess = "";
-		for (int i = 0; i < numCandidates; i++) {
-			cs += c[i] + " ";
-			ss += s[i] + " ";
-			candidatess += candidates[i] + " ";
-		}
-		System.out.println("ALGORITHM COMPLETE. Results:");
-		System.out.println("Candidates: " + candidatess);
-		System.out.println("RR: " + rrs);
-		System.out.println("S[i]: " + ss);
-		System.out.println("C[i]: " + cs);
-		System.out.println("");
-		System.out.println("Calculated Optimal: " + this.optimal);*/
 	}
 	
 	public DPAlgorithm(double[] candidates) {
@@ -69,13 +54,12 @@ public class DPAlgorithm extends ChoiceAlgorithm {
 	//Populates s[] and returns c[]
 	private double[] generateCValues() {
 		double[] tentCVal = new double[numCandidates];
-		tentCVal[numCandidates - 1] = (numCandidates + 1) / 2;
+		tentCVal[numCandidates - 1] = (numCandidates + 1.0) / 2.0;
 
 		this.s = new int[numCandidates];
-		s[numCandidates - 1] = (int)((numCandidates + 1) / 2); //init with s_n-1
+		s[numCandidates - 1] = (int)(numCandidates); //init with s_n-1 TODO: Nothing to do, marking this. In the paper is says S[n] = n and i had n/2
 
 		for (int i = numCandidates - 2; i >= 0; i--) { //n-2 -> 0
-			//System.out.println("Calculating c[" + i + "]");
 			//get ci
 			double oneoveri = 1.0 / (i + 1.0);
 			double ratio = (numCandidates + 1.0) / (i + 2.0);
@@ -102,7 +86,7 @@ public class DPAlgorithm extends ChoiceAlgorithm {
 		for (int i = 0; i < numCandidates; i++) {
 			seen.add(candidates[i]);
 			relRank[i] = seen.tailSet(candidates[i]).size();
-			if (relRank[i] < s[i] & continueLooking) {
+			if (relRank[i] <= s[i] & continueLooking) {
 				optimalI = i;
 				continueLooking = false;
 			}

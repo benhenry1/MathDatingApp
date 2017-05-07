@@ -12,7 +12,43 @@
     android:layout_margin="6dp" >
 
 
-<LinearLayout
+    <LinearLayout
+        android:id="@+id/love"
+        android:layout_width="fill_parent"
+
+        android:layout_height="fill_parent"
+
+        android:gravity="center"
+
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Soulmate Matcher \n (With Probability ~38%)"
+            android:textColor="#191975"
+            android:textSize="25dp"
+            android:textStyle="italic"
+            android:textAlignment="center">
+
+            </TextView>
+
+        <ImageView
+        android:layout_marginTop="15dp"
+        android:id="@+id/love_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/love" />
+
+        <Button
+            android:text="Find The One"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lovePageButton" />
+    </LinearLayout>
+
+    <LinearLayout
     android:id="@+id/stats"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -42,39 +78,5 @@
         android:id="@+id/statPageButton" />
 </LinearLayout>
 
-<LinearLayout
-    android:id="@+id/love"
-    android:layout_width="fill_parent"
-
-    android:layout_height="fill_parent"
-
-    android:gravity="center"
-
-    android:orientation="vertical" >
-
-<TextView
-    android:layout_marginTop="15dp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Soulmate Matcher (With Probability ~38%)"
-    android:textColor="#191975"
-    android:textSize="25dp"
-    android:textStyle="italic" >
-
-    </TextView>
-
-<ImageView
-    android:layout_marginTop="15dp"
-    android:id="@+id/love_pic"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:src="@drawable/love" />
-
-    <Button
-        android:text="Find The One"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/lovePageButton" />
-</LinearLayout>
-    </ViewFlipper>
+</ViewFlipper>
     </LinearLayout>
