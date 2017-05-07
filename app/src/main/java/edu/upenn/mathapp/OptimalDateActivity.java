@@ -81,13 +81,14 @@ public class OptimalDateActivity extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                deleteLocalData();
                 Intent backHomeIntent = new Intent(getApplicationContext(), MainActivity.class);
                 backHomeIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 //Show thanks toast
                 Toast.makeText(getApplicationContext(), "Thanks for using the Math Of Choice Dating App", Toast.LENGTH_LONG).show();
                 //Clear all date data
-                deleteLocalData();
-                resetApp();
+
+                //resetApp();
 
                 startActivity(backHomeIntent);
             }
@@ -102,6 +103,7 @@ public class OptimalDateActivity extends AppCompatActivity {
     private void deleteLocalData() {
         File path = new File(getFilesDir() + "/dates.txt");
         File pics = new File(Environment.DIRECTORY_PICTURES);
+        //File data = new File(getFilesDir() + "/data.txt");
 
         for (int i = 0; i < 100; i++) {
             File fol = new File(pics.getAbsolutePath() + "/date" + i);
@@ -110,6 +112,7 @@ public class OptimalDateActivity extends AppCompatActivity {
         }
         path.delete();
         pics.delete();
+        //data.delete();
 
     }
 

@@ -9,9 +9,15 @@ import android.widget.EditText;
 
 import com.example.ChoiceImpl.Date;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 public class NumberOfDatesActivity extends AppCompatActivity {
 
     private EditText number;
+    private int numberOfDates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,5 +53,7 @@ public class NumberOfDatesActivity extends AppCompatActivity {
         loveIntent.putExtra("number",  num);
         startActivity(loveIntent);
     }
+
+
 
 }

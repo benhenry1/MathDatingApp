@@ -49,22 +49,22 @@ public class DatingHomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dating_home);
-        numAvailableDates = getIntent().getIntExtra("number", 0);
+        if (! (getIntent().getIntExtra("number", 0) == 0))
+            numAvailableDates = getIntent().getIntExtra("number", 0);
 
-        datesByPreferenceOrder = new ArrayList<Date>(numAvailableDates);
+
+        dateCount = (TextView) findViewById(R.id.dateCount);
+        datesTotal = (TextView) findViewById(R.id.totalDates);
 
         if (firstRun) {
             firstRun = false; //TODO: This only works over 1 app run. make global somehow. write to file?
-            System.out.println(numAvailableDates);
-            dateCount = (TextView) findViewById(R.id.dateCount);
-            datesTotal = (TextView) findViewById(R.id.totalDates);
-            //deleteLocalData(); //Deletes all dates, pics
-            if (firstRun) {
-                firstRun = false; //TODO: This only works over 1 app run. make global somehow. write to file?
-                datesByPreferenceOrder = new ArrayList<Date>(numAvailableDates);
-                readDatesFromFile(); //FirstRun still needs to exist so we know when to read dates from file. Everything else should be under the control of syd's code
+            //System.out.println(numAvailableDates);
 
-                if (RankDateActivity.getEffectiveSize(datesByPreferenceOrder) == 0) { //We dont need this prompt if theres already dates in there
+            //deleteLocalData(); //Deletes all dates, pics
+            datesByPreferenceOrder = new ArrayList<Date>(numAvailableDates);
+            readDatesFromFile(); //FirstRun still needs to exist so we know when to read dates from file. Everything else should be under the control of syd's code
+
+            if (RankDateActivity.getEffectiveSize(datesByPreferenceOrder) == 0) { //We dont need this prompt anymore
                     //promptForInput();
 
                     //init arraylist with nulls apparently
@@ -74,10 +74,12 @@ public class DatingHomeActivity extends AppCompatActivity {
                         datesByPreferenceOrder.add(datesByPreferenceOrder.size(), null);
                         i++;
                     }
-                }
-            } else {
-                writeDatesToFile();
             }
+            stoppingAlgorithm = new DateStoppingAlgorithm(numAvailableDates);
+            stoppingAlgorithm.setNumDates(RankDateActivity.getEffectiveSize(datesByPreferenceOrder));
+        } else {
+            writeDatesToFile();
+        }
             printDatePref();
             //while(pauseforinput);
 
@@ -86,8 +88,7 @@ public class DatingHomeActivity extends AppCompatActivity {
             datesTotal.setText("Total Dates: " + numAvailableDates);
 
             System.out.println(numAvailableDates);
-            stoppingAlgorithm = new DateStoppingAlgorithm(numAvailableDates);
-            stoppingAlgorithm.setNumDates(RankDateActivity.getEffectiveSize(datesByPreferenceOrder));
+
             /*********************Programmatically list all dates**********************/
 
 
@@ -105,6 +106,7 @@ public class DatingHomeActivity extends AppCompatActivity {
 
                 if (d.getPicture() == null || !d.getPicture().exists())
                     profile.setImageResource(R.drawable.nopic);
+
                 else {
                     Bitmap b = BitmapFactory.decodeFile(d.getPicture().getAbsolutePath());
                     profile.setImageBitmap(b.createScaledBitmap(b, 200, 200, false));
@@ -170,7 +172,7 @@ public class DatingHomeActivity extends AppCompatActivity {
                 }
             });
         }
-    }
+
 
 
     //index should be desired rank - 1 because of the 0 indexing
@@ -367,6 +369,7 @@ public class DatingHomeActivity extends AppCompatActivity {
     private void deleteLocalData() {
         File path = new File(getFilesDir() + "/dates.txt");
         File pics = new File(Environment.DIRECTORY_PICTURES);
+        File data = new File(getFilesDir() + "/data.txt");
 
         for (int i = 0; i < numAvailableDates; i++) {
             File fol = new File(pics.getAbsolutePath() + "/date" + i);
@@ -374,6 +377,7 @@ public class DatingHomeActivity extends AppCompatActivity {
         }
         path.delete();
         pics.delete();
+        data.delete();
 
     }
 

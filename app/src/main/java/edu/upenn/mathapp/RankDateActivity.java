@@ -40,7 +40,7 @@ public class RankDateActivity extends AppCompatActivity {
         thisDate = (Date) getIntent().getSerializableExtra("Date");
         dateList = (ArrayList<Date>) getIntent().getSerializableExtra("Dates");
 
-        System.out.println("This Date: " + thisDate + " Datelist Size: " + getEffectiveSize(dateList));
+        //System.out.println("This Date: " + thisDate + " Datelist Size: " + getEffectiveSize(dateList));
 
 
         //These all to be updated on each iter
@@ -52,7 +52,7 @@ public class RankDateActivity extends AppCompatActivity {
 
         //We can set the current dudes value once and leave it
         ImageView thisPicture = (ImageView) findViewById(R.id.thisPic);
-        if (thisDate.getPicture() != null) {
+        if (thisDate.hasPicture()) {
             Bitmap b = BitmapFactory.decodeFile(thisDate.getPicture().getAbsolutePath());
             thisPicture.setImageBitmap(b.createScaledBitmap(b, 100, 100, false));
         }

@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         System.out.println("visited  " + visited);
         System.out.println("numofdates  " + numberOfDates);
 
@@ -73,10 +72,12 @@ public class MainActivity extends AppCompatActivity {
                     visited = true;
                     writeDataToFile();
                     startActivity(loveIntent);
+
                 }
                 //if have been visited
                 Intent newloveIntent = new Intent(getApplicationContext(), NumberOfDatesActivity.class);
                 newloveIntent.putExtra("number",  numberOfDates);
+                writeDataToFile();
                 startActivity(newloveIntent);
             }
         });
