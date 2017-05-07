@@ -8,12 +8,13 @@ import java.io.Serializable;
  * Ideally each Date object will be created by a form with all these fields on it
  */
 
-public class Date implements Serializable{
+public class Date implements Serializable {
     private int weight = -1, age = -1;
     private String name, occupation = "", height = "";
     private File picture = null; //Can be added later from viewDates?
 
     private int dateId; //Just which date this was in chronological order
+
 
 
     public Date(String name, int dateId) {

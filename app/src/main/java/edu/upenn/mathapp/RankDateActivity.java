@@ -39,7 +39,8 @@ public class RankDateActivity extends AppCompatActivity {
 
         thisDate = (Date) getIntent().getSerializableExtra("Date");
         dateList = (ArrayList<Date>) getIntent().getSerializableExtra("Dates");
-        System.out.println(thisDate);
+
+        System.out.println("This Date: " + thisDate + " Datelist Size: " + getEffectiveSize(dateList));
 
 
         //These all to be updated on each iter
@@ -78,7 +79,6 @@ public class RankDateActivity extends AppCompatActivity {
             thisOcc.setText(thisDate.getOccupation());
 
         //Break back to home if this is the first date. Auto rank 1
-        int numdates = getEffectiveSize(dateList);
         if (getEffectiveSize(dateList) == 0) {
             submit(1, thisDate);
             return;
@@ -151,6 +151,8 @@ public class RankDateActivity extends AppCompatActivity {
 
     //The arraylist size counts NULL elements-- count the nonnull elements
     public static int getEffectiveSize(ArrayList<Date> list) {
+        if (list == null)
+            return 0;
         int nonNullCounter = 0;
 
         for (Date o : list) {

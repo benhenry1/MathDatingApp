@@ -10,6 +10,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ViewFlipper;
+import android.content.SharedPreferences;
+
 
 public class MainActivity extends AppCompatActivity {
     private ViewFlipper viewFlipper;
@@ -125,5 +127,10 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     }
+
+
+    /******************Read/Write Dates From
+    File***************************/
+
 
 }

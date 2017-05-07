@@ -208,11 +208,13 @@ public class NewDateActivity extends AppCompatActivity {
                         "Picture saved.",
                         Toast.LENGTH_SHORT);
                 t.show();
+                System.out.println(picture.getAbsolutePath());
                 displayedPic.setImageBitmap(BitmapFactory.decodeFile(picture.getAbsolutePath()));
                 displayedPic.invalidate();
             }
         }
     }
+
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
