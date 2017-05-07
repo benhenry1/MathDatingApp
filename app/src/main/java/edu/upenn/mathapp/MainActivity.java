@@ -3,6 +3,7 @@ package edu.upenn.mathapp;
 import android.Manifest;
 import android.content.Intent;
 import android.gesture.Gesture;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.SharedPreferences;
@@ -14,18 +15,24 @@ import android.widget.ViewFlipper;
 import android.content.SharedPreferences;
 
 
+import com.example.ChoiceImpl.Date;
+
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private ViewFlipper viewFlipper;
     private GestureDetector gestureDetector;
     private float lastX;
-    private int visited = 0;
+    private boolean visited = false;
     private int numberOfDates = 10;
     private static final int REQUEST_EXTERNAL_STORAGE = 1;
     private static String[] STORAGE_PERMISSIONS = {
@@ -37,29 +44,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        FileInputStream fis = null;
-        try {
-            fis = openFileInput("hello.txt");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        if (fis == null) {
+        System.out.println("visited  " + visited);
+        System.out.println("numofdates  " + numberOfDates);
 
-        }
-        else {
-            InputStreamReader isr = new InputStreamReader(fis);
-            BufferedReader bufferedReader = new BufferedReader(isr);
-            try {
-                visited = Integer.parseInt(bufferedReader.readLine());
-                numberOfDates = Integer.parseInt(bufferedReader.readLine());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
 
 
         viewFlipper = (ViewFlipper) findViewById(R.id.viewflipper);
         gestureDetector = new GestureDetector(this.getApplicationContext(), new GestureTap());
+        readDataFromFile();
 
         Button statButton = (Button) findViewById(R.id.statPageButton);
         Button loveButton = (Button) findViewById(R.id.lovePageButton);
@@ -76,22 +68,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //if have not been visited
-                if (visited == 0) {
+                if (!visited) {
                     Intent loveIntent = new Intent(getApplicationContext(), DatingHomeActivity.class);
+                    visited = true;
+                    writeDataToFile();
                     startActivity(loveIntent);
-
-                    String filename = "visited";
-
-                    FileOutputStream fos = null;
-                    try {
-                        fos = openFileOutput(filename, MODE_PRIVATE);
-                        fos.write(1);
-                        fos.close();
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                 }
                 //if have been visited
                 Intent newloveIntent = new Intent(getApplicationContext(), NumberOfDatesActivity.class);
@@ -150,7 +131,58 @@ public class MainActivity extends AppCompatActivity {
         return false;
     }
 
+    /************************READING AND WRITING DATA TO FILE****/
+    public void readDataFromFile() {
 
+        File path = new File(getFilesDir() + "/data.txt");
+        //if (RankDateActivity.getEffectiveSize(datesByPreferenceOrder) == 0)
+        //    return;
+        try {
+            FileInputStream fileIn =
+                    new FileInputStream(path);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            //I think this writes some nulls
+            visited = in.readBoolean();
+            numberOfDates = in.readInt();
+
+            in.close();
+            fileIn.close();
+        }catch(IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+    public void writeDataToFile() {
+        try {
+            File path = new File(getFilesDir() + "/data.txt");
+            FileOutputStream fileOut =
+                    new FileOutputStream(path);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeBoolean(visited);
+            out.writeInt(numberOfDates);
+            out.close();
+            fileOut.close();
+        }catch(IOException i) {
+            i.printStackTrace();
+        }
+    }
+
+    //Not referenced rn, but when called deletes all dates and pictures
+    private void resetApp() {
+        try {
+            File path = new File(getFilesDir() + "/data.txt");
+            FileOutputStream fileOut =
+                    new FileOutputStream(path);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeBoolean(false);
+            out.writeInt(0);
+            out.close();
+            fileOut.close();
+        }catch(IOException i) {
+            i.printStackTrace();
+        }
+
+    }
 
 
 

@@ -7,7 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.ChoiceImpl.Date;
+
 public class NumberOfDatesActivity extends AppCompatActivity {
+
+    private EditText number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,18 +19,33 @@ public class NumberOfDatesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_number_of_dates);
 
         EditText number = (EditText) findViewById(R.id.numDatesDialogue);
-        final int num = Integer.parseInt(number.getText().toString());
+        this.number = number;
 
         Button loveButton = (Button) findViewById(R.id.lovePageButton);
 
         loveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent loveIntent = new Intent(getApplicationContext(), DatingHomeActivity.class);
-                loveIntent.putExtra("number",  num);
-                startActivity(loveIntent);
+                if (validateForm()) {
+                    submitForm();
+                }
             }
         });
 
     }
+
+    private boolean validateForm() {
+        return number.getText().toString().matches("\\d+");
+    } //Only reqt is to have a name
+
+    //Create the date object, move to relative ranking page
+    private void submitForm() {
+
+        final int num = Integer.parseInt(number.getText().toString());
+
+        Intent loveIntent = new Intent(getApplicationContext(), DatingHomeActivity.class);
+        loveIntent.putExtra("number",  num);
+        startActivity(loveIntent);
+    }
+
 }

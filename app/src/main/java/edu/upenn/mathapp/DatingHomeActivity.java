@@ -51,6 +51,8 @@ public class DatingHomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dating_home);
         numAvailableDates = getIntent().getIntExtra("number", 0);
 
+        datesByPreferenceOrder = new ArrayList<Date>(numAvailableDates);
+
         if (firstRun) {
             firstRun = false; //TODO: This only works over 1 app run. make global somehow. write to file?
             System.out.println(numAvailableDates);
@@ -177,13 +179,15 @@ public class DatingHomeActivity extends AppCompatActivity {
     }
 
     public static void printDatePref() {
+        if (datesByPreferenceOrder == null) {
+            return;
+        }
         for(Date d : datesByPreferenceOrder) {
             if (d != null)
-                System.out.print(d.getName() + " ");
+                System.out.println(d.getName() + " ");
             else
-                System.out.print("null ");
+                System.out.println("null ");
         }
-        System.out.println();
     }
 
 

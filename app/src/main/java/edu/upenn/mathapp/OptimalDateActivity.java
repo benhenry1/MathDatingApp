@@ -16,6 +16,9 @@ import android.content.Intent;
 import com.example.ChoiceImpl.Date;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 
 /**
  * Created by Ben on 5/7/2017.
@@ -84,6 +87,7 @@ public class OptimalDateActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Thanks for using the Math Of Choice Dating App", Toast.LENGTH_LONG).show();
                 //Clear all date data
                 deleteLocalData();
+                resetApp();
 
                 startActivity(backHomeIntent);
             }
@@ -106,6 +110,23 @@ public class OptimalDateActivity extends AppCompatActivity {
         }
         path.delete();
         pics.delete();
+
+    }
+
+    //Not referenced rn, but when called deletes all dates and pictures
+    private void resetApp() {
+        try {
+            File path = new File(getFilesDir() + "/data.txt");
+            FileOutputStream fileOut =
+                    new FileOutputStream(path);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeBoolean(false);
+            out.writeInt(0);
+            out.close();
+            fileOut.close();
+        }catch(IOException i) {
+            i.printStackTrace();
+        }
 
     }
 

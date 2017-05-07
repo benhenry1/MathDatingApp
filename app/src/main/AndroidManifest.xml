@@ -33,7 +33,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
         <activity android:name=".StatisticsHomeActivity"></activity>
         <activity android:name=".GatherStatisticsActivity" />
         <activity android:name=".DatingHomeActivity"></activity>
@@ -44,24 +43,8 @@
      ATTENTION: This was auto-generated to add Google Play services to your project for
      App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information.
         -->
-=======
-        <activity android:name=".StatisticsHomeActivity" >
-
-        </activity>
-        <activity android:name=".GatherStatisticsActivity"></activity>
-        <activity android:name=".DatingHomeActivity">
-        </activity>
-        <activity android:name=".NewDateActivity">
-        </activity>
-        <activity android:name=".ViewDateActivity">
-        </activity>
-        <activity android:name=".RankDateActivity">
-        </activity>
         <activity android:name=".OptimalDateActivity">
         </activity>
-        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
-     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
->>>>>>> aef28ced5e8ebbc5c2b59cc2e383bf2f3cd0612b
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
